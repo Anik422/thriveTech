@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'CSS\courses-style.css' %}">
+<title>{{ title }}</title>
+{% endblock %}
+
+{% block content %}
+<div class="container courses">
+    <div class="course-card">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for course in courses %}
+            <div class="col card-view" id="{{ forloop.counter }}">
+                <div class="card h-100 course-active">
+                    <img src="{{ course.course_photo.url }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ course.course_name }}</h5>
+                        <p class="card-text">{{ course.short_description }}</p>
+                        <div class="price d-flex justify-content-between">
+                            <h5 style="color: green;"><span>$</span>{{ course.course_fee }}</h5>
+                            <h5 class="old-price" style="color: red;"><span>$</span>{{ course.course_old_fee }}</h5>
+                        </div>
+                            <a class="button" href="{% url 'homeApp:course-view' course.id %}">View Course</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

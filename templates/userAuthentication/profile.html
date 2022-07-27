@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'CSS/profile-style.css' %}">
+<title>{{ full_name }}</title>
+{% endblock %}
+{% block content %}
+
+<main class="container profile">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="user">
+                <div class="user">
+                    <div class="profile-image">
+                    {% if user_more_info.profile_image %}
+                        <img src="{{ user_more_info.profile_image.url }}" alt="">
+                        {% else %}
+                        {% if user_more_info.gender == 'M' %}
+                        <img src="{% static 'image/man.jpg' %}" alt="">
+                        {% else %}
+                        <img src="{% static 'image/woman.jpg' %}" alt="">
+                        {% endif %}
+                        {% endif %}
+                        <button id="image-up-btn" onclick="profileUplodView()"><i class="fa-solid fa-camera"></i></button>
+                    </div>
+                    <h3 class="name">{{ full_name }}</h3>
+                    <p>{{ user_basic_info.email }}</p>
+                </div>
+            </div>
+            <hr>
+            <ul class="dashboard-manu">
+                <li class="dash-item"><a href="#dashboard" onclick="dashboardView()">Dashboard</a></li>
+                <li class="dash-item"><a href="#order" onclick="orderView()">Order</a></li>
+                <li class="dash-item"><a href="#account-detalis" onclick="accountDetalisView()">Account detalis</a></li>
+                <li class="dash-item"><a href="{% url 'userAuthentication:user-logout' %}">Log out</a></li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <div id="dashboard">
+                <h4>Refer A Friend & Earn Discount</h4>
+                <br>
+                <p>If you refer your friends, family or colleagues to Bohubrihi and if they purchase a course on our
+                    website; you will get an exclusive discount coupon as a thank-you-gift. Using that coupon, you will
+                    enjoy 500 Taka discount on your next purchase. 🙂
+                    <br>
+                    <br>
+                    So copy the referral link below and share it to everyone who might be interested in taking some of
+                    our online courses. Once they visit our website through your link and purchase a course, you will
+                    get your discount coupon emailed to your address. The coupons are also displayed here in this page,
+                    once issued.
+                    <br>
+                    <br>
+                    Please note: <br>
+                    – You will get a new discount coupon every time a person buys a course through your link. For
+                    example
+                    <br>– if 10 people buy through your link, you will get 10 discount coupons (each of 500 Taka).
+                    <br>– You can use only one coupon at a time.
+                    <br>– When using your coupon, make sure that the order total (total amount in the cart before using
+                    your coupon) is at least 1000 Taka.
+                </p>
+            </div>
+            <div id="order">
+                <div class="alert alert-success" role="alert">
+                    <div class="row">
+                        <div class="col-9">
+                            <i class='fas fa-exclamation-circle'></i> No order has been made yet.
+                        </div>
+                        <div class="col-3">
+                            <a class="button" href="{% url 'homeApp:courses' courseType='run' %}">Browse Courses</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div id="account-detalis">
+                <form action="{% url 'userAuthentication:update-profile' user_basic_info.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="user-name">Username : </label>
+                            <input id="user-name" class="form-control" type="text"
+                                value="{{ user_basic_info.username }}" name="username">
+                            <label for="first-name">First Name : </label>
+                            <input id="first-name" class="form-control" type="text"
+                                value="{{ user_basic_info.first_name }}" name="first_name">
+                            <label for="last-name">Last Name : </label>
+                            <input id="last-name" class="form-control" type="text"
+                                value="{{ user_basic_info.last_name }}" name="last_name">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="email-id">Email Address : </label>
+                            <input id="email-id" class="form-control" type="email" value="{{ user_basic_info.email }}"
+                                name="email">
+
+                            <label for="cars">Gender:</label>
+                            <select class="form-control" name="gender" id="cars">
+                                {% if user_more_info.gender == "M" %}
+                                <option value="M">Male</option>
+                                <option value="F">Female</option>
+                                {% else %}
+                                <option value="F">Female</option>
+                                <option value="M">Male</option>
+                                {% endif %}
+                            </select>
+                            <label for="facebook-link">Facebook link : </label>
+                            <input id="facebook-link" class="form-control" type="url"
+                                value="{{ user_more_info.facebook_id }}" name="facebook_link">
+                        </div>
+                    </div>
+                    <h6 class="save" ><input class="button" type="submit" name="submit" value="Save"></h6>
+                </form>
+            </div>
+            <div id="profile-uplod">
+                <div class="profile-image">
+                    {% if user_more_info.profile_image %}
+                        <img id="change-show" src="{{ user_more_info.profile_image.url }}" alt="">
+                        {% else %}
+                        {% if user_more_info.gender == 'M' %}
+                        <img id="change-show" src="{% static 'image/man.jpg' %}" alt="">
+                        {% else %}
+                        <img id="change-show" src="{% static 'image/woman.jpg' %}" alt="">
+                        {% endif %}
+                        {% endif %}
+                </div>
+                <div class="upload-section">
+                    <form action="{% url 'userAuthentication:set-profile-image' user_basic_info.id %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="profile-form">
+                            {{ form.as_p }}
+                        </div>
+                        <!-- <input type="file" name="upload" id="file" class="form-control" /> -->
+                        
+                        <br>
+                        <h6 class="save"><input type="submit" value="Profile Upload" class="button"></h6>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    const dashboard = document.getElementById('dashboard');
+    const order = document.getElementById('order');
+    const account_detalis = document.getElementById("account-detalis");
+    const profile_uplod = document.getElementById("profile-uplod");
+    const id_profile_image = document.getElementById("id_profile_image");
+
+    dashboardView()
+    
+    id_profile_image.addEventListener('change', (event) => {
+        var image = document.getElementById('change-show');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    })
+
+    function profileUplodView() {
+        profile_uplod.style.display = 'block';
+        account_detalis.style.display = 'none';
+        dashboard.style.display = 'none';
+        order.style.display = 'none';
+    }
+    function accountDetalisView() {
+        account_detalis.style.display = 'block';
+        profile_uplod.style.display = 'none';
+        dashboard.style.display = 'none';
+        order.style.display = 'none';
+    }
+    function accountDetalisView() {
+        account_detalis.style.display = 'block';
+        profile_uplod.style.display = 'none';
+        dashboard.style.display = 'none';
+        order.style.display = 'none';
+    }
+    function dashboardView() {
+        dashboard.style.display = 'block';
+        profile_uplod.style.display = 'none';
+        account_detalis.style.display = 'none';
+        order.style.display = 'none';
+    }
+    function orderView() {
+        order.style.display = 'block';
+        profile_uplod.style.display = 'none';
+        dashboard.style.display = 'none';
+        account_detalis.style.display = 'none';
+    }
+</script>
+{% endblock %}

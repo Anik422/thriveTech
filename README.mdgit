@@ -1,0 +1,2 @@
+"# thriveTech"  initgit add README.mdgit commit -m "first commit"git branch -M maingit remote add origin https://github.com/Anik422/thriveTech.gitgit push -u origin main
+"# thriveTech"  initgit add README.mdgit commit -m "first commit"git branch -M maingit remote add origin https://github.com/Anik422/thriveTech.gitgit push -u origin main

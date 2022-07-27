@@ -1,0 +1,29 @@
+.helptext{
+    display: none;
+}
+#id_profile_image{
+    font-size: 16px;
+    font-weight: 600;
+    background: white;
+    border-radius: 50px;
+    box-sizing: 5px 5px 10px black;
+    width: 100%;
+    outline: none;
+}
+::-webkit-file-upload-button{
+    color: white;
+    background-color: #438a5e;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    box-sizing: 1px 0 1px 1px #6b4559;
+    outline: none;
+}
+::-webkit-file-upload-button:hover{
+    background-color: #206a5d;
+
+}
+.req-form{
+    padding: 30px 10px;
+    width: 50%;
+}

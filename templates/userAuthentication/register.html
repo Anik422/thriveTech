@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'CSS\register-style.css' %}">
+<title>{{ title }}</title>
+{% endblock %}
+{% block content %}
+
+<div class="container d-flex justify-content-center align-items-center" style="text-align: center;">
+    {% if registered %}
+    <div  class="alert alert-warning" role="alert">
+        A simple info alert—check it out!
+    </div>
+    
+    {% else %}
+    
+    <div class="req-form">
+        <h1>Register</h1>
+        <form enctype="multipart/form-data" method="POST">
+            {{ user_form.as_p }}
+            {{ user_info_form.as_p }}
+            {% csrf_token %}
+            <input type="submit" name="submit" value="Register">
+        </form>
+    </div>
+
+    {% endif %}
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'CSS\view-style.css' %}">
+<title>{{ course.course_name }}</title>
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container car">
+        <div class="row">
+            <div class="col-md-8 d-flex align-items-center view-title">
+                <div class="header-dis">
+                    <h1 class="header-title">{{ course.course_name }}</h1>
+                    <p class="text-muted">{{ course.short_description }}</p>
+                    <h5><span class="value"><span class="tk">$</span> {{ course.course_fee }}</span><span class="value old-value"><span class="tk">$</span> {{ course.course_old_fee }}</span></h5>
+                    <a class="btn" href="{% url 'homeApp:enroll-course' %}">Enroll</a>
+                </div>
+            </div>
+            <div class="col-md-4 view-img">
+                <img class="header-img" src="{{ course.course_photo.url }}" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+<section class="container car">
+    <div class="description-view">
+        <div class="description">
+            <h1>Description</h1>
+            <p>{{ course.description }}</p>
+        </div>
+        <hr>
+        <div class="row d-flex justify-content-between">
+            <div class="col-md-6">
+                <h1>{{ courseDetails.heading_first }}</h1>
+                <p>{{ courseDetails.heading_firs_description }}</p>
+            </div>
+            <div class="col-md-6">
+                <h1>{{ courseDetails.heading_second}}</h1>
+                <p>{{ courseDetails.heading_second_description}}</p>
+            </div>
+        </div>
+        <hr>
+        <div class="row d-flex justify-content-between">
+            <div class="col-md-6">
+                <h1>{{ courseDetails.list_first }}</h1>
+                <p>{{ courseDetails.list_first_description }}</p>
+            </div>
+            <div class="col-md-6">
+                <h1>{{ courseDetails.list_second }}</h1>
+                <p>{{ courseDetails.list_second_description }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

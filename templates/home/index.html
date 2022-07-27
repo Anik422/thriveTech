@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'CSS\home-style.css' %}">
+<title>{{ title }}</title>
+{% endblock %}
+
+
+
+{% block content %}
+<main>
+    <section class="container car">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{% static 'image/importance-soft-skills.jpg' %}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'image/starting-a-software-company.jpg' %}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'image/2COL-Hero-TradeAllies.jpg' %}" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+    <section class="container car pading" id="course">
+        <div class="section-title d-flex justify-content-between">
+            <h5><button type="button" id="previous" onclick="previousBtn()">Previous</button></h5>
+            <h1>Thrive Technology's Training Projects</h1>
+            <h5><button type="button" id="next" onclick="nextBtn()">Next</button></h5>
+        </div>
+        <div class="container car">
+            <div class="course-card">
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    {% for course in courses %}
+                    <div class="col card-view" id="{{ forloop.counter }}">
+                        <div class="card h-100 course-active">
+                            <img src="{{ course.course_photo.url }}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ course.course_name }}</h5>
+                                <p class="card-text">{{ course.short_description }}</p>
+                                <div class="price d-flex justify-content-between">
+                                    <h5 style="color: green;"><span>$</span>{{ course.course_fee }}</h5>
+                                    <h5 class="old-price" style="color: red;"><span>$</span>{{ course.course_old_fee }}
+                                    </h5>
+                                </div>
+                                <a class="button" href="{% url 'homeApp:course-view' course.id %}">View Course</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="container car">
+        <div class="row elementor-parent">
+            <div class="col-md-3">
+                <div class="elementor">
+                    <h3>Founder Members</h3>
+                    <h1>4</h1>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="elementor">
+                    <h3>Advisors</h3>
+                    <h1>2</h1>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="elementor">
+                    <h3>Board of Director</h3>
+                    <h1>5</h1>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="elementor">
+                    <h3>Managment</h3>
+                    <h1>15</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="container car">
+        <div class="our-vision">
+            <h1 class="section-name">Our Vision</h1>
+            <div class="video-section">
+                <div class="row">
+                    <div class="col-md-6 video">
+                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/FaamxLa1p1M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="col-md-6 video">
+                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/rWbAFsfYV70" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="container car">
+        <div class="who-with-us">
+            <h1 class="section-name">Who With Us</h1>
+            <div class="row d-flex justify-content-around">
+                <div class="col-md-3 who-with-us-card">
+                    <h3>Advisor Committee</h3>
+                    <h5>Thrive Technology has an Advisor Committee..............</h5>
+                </div>
+                <div class="col-md-3 who-with-us-card">
+                    <h3>Advisor Committee</h3>
+                    <h5>Thrive Technology has an Advisor Committee..............</h5>
+                </div>
+                <div class="col-md-3 who-with-us-card">
+                    <h3>Advisor Committee</h3>
+                    <h5>Thrive Technology has an Advisor Committee..............</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<script>
+    const previous = document.getElementById("previous")
+    previous.style.display = 'none'
+    display(1)
+    let count = 1
+    function nextBtn() {
+        count += 1
+        previous.style.display = 'block'
+        display(count)
+    }
+    function previousBtn() {
+        count -= 1
+        previous.style.display = 'block'
+        display(count)
+    }
+    function display(num1) {
+        for (let i = 1; i <= 4; i++) {
+            const card = document.getElementById(i)
+            if (i >= num1 && i < (num1 + 3)) {
+                card.style.display = 'block'
+            }
+            else {
+                card.style.display = 'none'
+            }
+        }
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<title>Login</title>
+<link rel="stylesheet" href="{% static 'CSS\login-style.css' %}">
+{% endblock %}
+{% block content %}
+<div class="container size-add d-flex justify-content-center align-items-center">
+  <div class="login-card">
+    <h1>log In</h1>
+    <form action="{% url 'userAuthentication:user-login' %}" method="POST">
+      {% csrf_token %}
+      <div class="text-field">
+        <input id="username" type="username" name="username" required>
+        <span></span>
+        <label for="username">Username</label>
+      </div>
+      <div class="text-field">
+        <input id="user-password" type="password" name="user-password" required>
+        <span></span>
+        <label for="user-password">Password</label>
+      </div>
+      <div class="pass">
+        <a href="#">Forgot Password</a>
+      </div>
+      <input type="submit" value="Log In">
+      <div class="signup_link">
+        Not a member? <a href="{% url 'userAuthentication:register-page' %}">Signup</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

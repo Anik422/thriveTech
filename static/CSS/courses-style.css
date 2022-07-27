@@ -1,0 +1,45 @@
+.courses{
+    margin-top: 50px;
+    border-radius: 20px;
+}
+.button{
+    background-color: #21B573;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
+    color: dimgray;
+    padding: 5px 50px;
+    border-radius: 20px;
+}
+.button:hover{
+    border: 2px solid green;
+    color: white;
+}
+
+.course-card{
+    padding-bottom: 30px;
+}
+.card-img, .card-img-bottom, .card-img-top {
+    display: block;
+    width: 50%;
+    height: 50%;
+    margin: 20px auto;
+}
+.card-body{
+    text-align: center;
+}
+.card{
+    border-radius: 20px;
+}
+.course-active:hover{
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+}
+.price{
+    padding: 0px 50px 10px 50px;
+}
+.price span{
+    font-size: 20px;
+}
+.old-price{
+    text-decoration: line-through;
+}
